@@ -1,0 +1,44 @@
+.navigation-main {
+    display: flex;
+    gap: 50px;
+}
+
+.navigation-main__menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.navigation-main__link {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    color: #000000;
+    transition: .5s;
+}
+
+.navigation-main__link:hover {
+    opacity: .65;
+    cursor: pointer;
+}
+
+.navigation-main__link-active {
+    font-weight: 500;
+}
+
+.navigation-main__button-menu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navigation-main {
+        display: none;
+    }
+}

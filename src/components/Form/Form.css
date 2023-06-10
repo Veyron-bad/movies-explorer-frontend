@@ -1,0 +1,136 @@
+.form {
+    padding: 70px 0 70px 0;
+    box-sizing: border-box;
+    height: 100vh;
+}
+
+.form__content {
+    max-width: 396px;
+    width: calc(100% - 60px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__logo {
+    background-image: url('../../images/header_logo.svg');
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 38px;
+    width: 38px;
+    transition: .5s;
+}
+
+.form__logo:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.form__header {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-self: flex-start;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.form__title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.form__submit {
+    padding: 0;
+    background-color: #FF6838;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 0;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    transition: .5s;
+    margin-top: 47px;
+    width: 100%;
+}
+
+.form__submit:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.form__caption {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+    margin-top: 16px;
+}
+
+.form__caption-link {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FF6838;
+    transition: .5s;
+    padding-left: 6px;
+}
+
+.form__caption-link:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+@media (max-width: 768px) {
+    .form {
+        padding-top: 232px;
+    }
+}
+
+@media (max-width: 320px) {
+    .form {
+        padding-top: 56px;
+    }
+
+    .form__header {
+        align-items: center;
+        gap: 50px;
+        padding-bottom: 80px;
+    }
+
+    .form__submit {
+        margin-top: 136px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .form__caption {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .form__caption-link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

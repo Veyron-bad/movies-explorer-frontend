@@ -1,0 +1,10 @@
+.movies-save {
+    min-height: 100vh;
+    position: relative;
+}
+
+.movies-save__container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+}

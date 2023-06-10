@@ -1,0 +1,142 @@
+.profile {
+    padding: 148px 0 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 123px;
+    max-width: 410px;
+    width: calc(100% - 60px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.profile__title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+}
+
+.profile__form {
+    width: 100%;
+}
+
+.profile__section {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.profile__section_name {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.profile__section_email {
+    padding-top: 17px;
+    box-sizing: border-box;
+}
+
+.profile__input-name {
+    background-color: transparent;
+    border: none;
+    text-align: right;
+    padding: 0;
+    width: 100%;
+}
+
+.profile__input-name:focus {
+    outline: 1px solid #2BE080;
+}
+
+.profile__input-email {
+    background-color: transparent;
+    border: none;
+    text-align: right;
+    width: 100%;
+    padding: 0;
+    outline: none;
+}
+
+.profile__input-email:focus {
+    outline: 1px solid #2BE080;
+}
+.profile__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 220px;
+}
+
+.profile__edit {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: .5s;
+}
+
+.profile__edit:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.profile__signout {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #EE3465;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: .5s;
+}
+
+.profile__signout:hover {
+    cursor: pointer;
+    opacity: .65;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        padding-top: 310px;
+        gap: 96px;
+    }
+
+    .profile__buttons {
+        margin-top: 213px;
+    }
+}
+
+@media (max-width: 320px) {
+    .profile {
+        padding-top: 144px;
+        gap: 80px;
+    }
+
+    .profile__buttons {
+        margin-top: 379px;
+    }
+}
