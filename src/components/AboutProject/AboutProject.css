@@ -51,7 +51,7 @@
 
 .about__schedule-green {
     margin: 0;
-    padding: 9px;
+    padding: 9px 0 9px 0;
     background-color: #2BE080;
     font-family: 'Inter';
     font-style: normal;
@@ -72,7 +72,7 @@
 
 .about__schedule-grey {
     margin: 0;
-    padding: 9px;
+    padding: 9px 0 9px 0;
     background-color: #F2F2F2;
     font-family: 'Inter';
     font-style: normal;
@@ -117,6 +117,20 @@
     }
 }
 
+@media (max-width: 500px) {
+    .about__colums {
+        flex-direction: column;
+    }
+
+    .about__schedule-green {
+        width: 100%;
+    }
+
+    .about__schedule-grey {
+        width: 100%;
+    }
+}
+
 @media (max-width: 320px) {
     .about {
         padding: 70px 0 70px;
@@ -124,7 +138,6 @@
 
     .about__colums {
         padding: 60px 0 60px;
-        flex-direction: column;
         gap: 56px;
     }
 
@@ -158,13 +171,13 @@
     .about__schedule-green {
         font-size: 11px;
         line-height: 13px;
-        padding: 11px;
+        padding: 11 0 11 0px;
     }
 
     .about__schedule-grey {
         font-size: 11px;
         line-height: 13px;
-        padding: 11px;
+        padding: 11px 0 11px 0;
     }
 
     .about__schedule-stage {

@@ -20,7 +20,7 @@ function Header({ location }) {
         <>
         <MobileMenu isActiveBth={isActiveBth} />
             <header className={isLocation ? 'header' : 'header header__main'}>
-                <div className='header__container content_m'>
+                <div className='header__container'>
                     <Link to='/' className='header__logo-link'>
                         <div className='header__logo'></div>
                     </Link>

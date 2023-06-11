@@ -16,13 +16,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, 0);
+    transform: translate(-50%, 0);
     z-index: 1;
+    max-width: 1140px;
+    width: calc(100% - 60px);
+    margin: 0 auto;
 }
 
 .header__logo-link {
     transition: .5s;
 }
+
 .header__logo-link:hover {
     cursor: pointer;
     opacity: .7;
@@ -82,7 +86,21 @@
     opacity: .65;
 }
 
+@media (max-width: 768px) {
+    .header__container {
+        max-width: 1140px;
+        width: calc(100% - 60px);
+        margin: 0 auto;
+    }
+}
+
 @media (max-width: 320px) {
+    .header__container {
+        max-width: 300px;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+    }
+
     .header__links {
         gap: 14px;
     }

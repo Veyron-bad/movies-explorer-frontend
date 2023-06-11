@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Arial', sans-serif;
     height: 100%;
 }
 
@@ -17,22 +17,10 @@ body {
     margin: 0 auto;
 }
 
-.content_m {
-    max-width: 1140px;
-    width: calc(100% - 140px);
-    margin: 0 auto;
-}
-
 @media (max-width: 768px) {
     .content {
         max-width: 708px;
         width: calc(100% - 100px);
-    }
-
-    .content_m {
-        max-width: 1140px;
-        width: calc(100% - 60px);
-        margin: 0 auto;
     }
 }
 
@@ -40,11 +28,5 @@ body {
     .content {
         max-width: 292px;
         width: calc(100% - 28px);
-    }
-
-    .content_m {
-        max-width: 300px;
-        width: calc(100% - 20px);
-        margin: 0 auto;
     }
 }

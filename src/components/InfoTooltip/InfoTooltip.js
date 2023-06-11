@@ -9,7 +9,7 @@ function InfoTooltip() {
     const closeInfoTool = () => {
         setIsBtnClose(!isBthClose);
     }
-    const setItfoTool = isBthClose ? 'info-tool' : 'info-tool_hidden';
+    const setItfoTool = isBthClose ? 'info-tool' : 'info-tool info-tool_hidden';
   return (
     <div className={setItfoTool}>
         <div className='info-tool__content'>

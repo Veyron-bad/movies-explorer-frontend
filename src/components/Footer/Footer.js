@@ -4,7 +4,7 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className='footer'>
-      <div className='footer__container content'>
+      <div className='footer__container'>
         <p className='footer__decription'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
         <div className='footer__bottom'>
             <p className='footer__copy'>© 2023</p>

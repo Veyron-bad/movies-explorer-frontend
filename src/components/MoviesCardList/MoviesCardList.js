@@ -12,7 +12,7 @@ function MoviesCardList({ isSavePage }) {
                 <MoviesCard isSavePage={ isSavePage } />
                 <MoviesCard isSavePage={ isSavePage } />
             </ul>
-            <button className='movie__more'>Ещё</button>
+            {/* <button className='movie__more'>Ещё</button> */}
         </>
     )
 }

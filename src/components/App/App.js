@@ -23,15 +23,17 @@ function App() {
     <div className="App">
       <InfoTooltip />
       {setHeader && <Header location={location} />}
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/signup' element={<Register />} />
+          <Route path='/signin' element={<Login />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </main>
       {setFooter && <Footer />}
     </div>
   );

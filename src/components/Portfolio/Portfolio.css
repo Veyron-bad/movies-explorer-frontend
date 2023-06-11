@@ -46,6 +46,16 @@
     padding-bottom: 0;
 }
 
+.portfolio__img-link {
+    text-decoration: none;
+    transition: .5s;
+}
+
+.portfolio__img-link:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
 .portfolio__list-img {
     margin: 0;
     font-family: 'Inter';

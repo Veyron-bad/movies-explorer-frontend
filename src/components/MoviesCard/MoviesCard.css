@@ -128,7 +128,7 @@
     background-color: #a7a4a4;
 }
 
-.movie__more {
+/* .movie__more {
     padding: 11px 60px 9px 60px;
     box-sizing: border-box;
     border: none;
@@ -142,7 +142,7 @@
     line-height: 15px;
     color: #000000;
     transition: .5s;
-}
+} */
 
 .movie__more:hover {
     cursor: pointer;
@@ -170,7 +170,7 @@
         padding-bottom: 14px;
     }
 
-    .movie__more {
+    /* .movie__more {
         width: 240px;
-    }
+    } */
 }

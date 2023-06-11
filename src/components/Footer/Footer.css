@@ -2,6 +2,12 @@
     background-color: #FAFAFA;
 }
 
+.footer__container {
+    max-width: 1140px;
+    width: calc(100% - 140px);
+    margin: 0 auto;
+}
+
 .footer__decription {
     font-family: 'Inter';
     font-style: normal;
@@ -54,7 +60,19 @@
     opacity: .7;
 }
 
+@media (max-width: 768px) {
+    .footer__container {
+        max-width: 1140px;
+        width: calc(100% - 60px);
+    }
+}
+
 @media (max-width: 320px) {
+    .footer__container {
+        max-width: 300px;
+        width: calc(100% - 20px);
+    }
+
     .footer__decription {
         font-size: 12px;
         line-height: 15px;
