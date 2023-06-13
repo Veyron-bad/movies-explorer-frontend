@@ -1,14 +1,27 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import './SearchForm.css';
 
 function SearchForm() {
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data);
+    }
     return (
-        <form className='search-form'>
+        <form onSubmit={handleSubmit(onSubmit)} className='search-form'>
             <div className='search-form__search'>
                 <div className='search-form__icon'></div>
-                <input className='search-form__input' name='movie-name' placeholder='Фильм' type='text' required />
+                <input
+                    className='search-form__input'
+                    placeholder='Фильм'
+                    {...register('movie', { required: 'Нужно ввести ключевое слово' })} />
                 <button className='search-form__button'>Найти</button>
-                <span className='search-form__error'>Нужно ввести ключевое слово</span>
+                {errors?.movie && <span className='search-form__error'>{errors?.movie?.message}</span>}
             </div>
             <div className='search-form__filter'>
                 <div className='search-form__filter-container'>
