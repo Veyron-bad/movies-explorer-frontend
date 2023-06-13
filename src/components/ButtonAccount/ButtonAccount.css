@@ -1,0 +1,12 @@
+.button-account {
+    background-color: #F9F9F9;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    transition: .5s;
+}
+
+.button-account:hover {
+    background-color: #a7a4a4;
+    cursor: pointer;
+}

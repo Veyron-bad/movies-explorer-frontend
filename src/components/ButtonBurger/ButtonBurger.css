@@ -1,0 +1,62 @@
+.burder-botton {
+    background-image: url('../../images/burger_button.svg');
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    position: absolute;
+    top: 14px;
+    right: 30px;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: .5s;
+    display: none;
+    z-index: 1;
+}
+
+.burder-botton:hover {
+    cursor: pointer;
+    opacity: .65;
+    width: 47px;
+    height: 47px;
+}
+
+.burder-botton-close {
+    background-image: url('../../images/burger_button-close.svg');
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 23px;
+    right: 22px;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+    transition: .5s;
+}
+
+.burder-botton-close:hover {
+    cursor: pointer;
+    opacity: .65;
+    width: 33px;
+    height: 33px;
+}
+
+@media (max-width: 768px) {
+    .burder-botton {
+        display: block;
+    }
+}
+
+@media (max-width: 320px) {
+    .burder-botton {
+        width: 40px;
+        height: 43px;
+        top: 16px;
+        right: 8px;
+    }
+}

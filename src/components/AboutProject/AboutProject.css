@@ -1,0 +1,187 @@
+.about {
+    padding: 110px 0 110px;
+}
+
+.about__colums {
+    padding: 70px 0 110px;
+    display: flex;
+    gap: 40px;
+}
+
+.about__column {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.about__subtitle {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+}
+
+.about__text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    margin: 0;
+    max-width: 550px;
+}
+
+.about__schedule {
+    display: flex;
+    justify-content: center;
+}
+
+.about__schedule-startweek {
+    max-width: 228px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.about__schedule-green {
+    margin: 0;
+    padding: 9px 0 9px 0;
+    background-color: #2BE080;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+}
+
+.about__schedule-endweek {
+    max-width: 912px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.about__schedule-grey {
+    margin: 0;
+    padding: 9px 0 9px 0;
+    background-color: #F2F2F2;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000;
+}
+
+.about__schedule-stage {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+}
+
+@media (max-width: 768px) {
+    .about {
+        padding: 90px 0 90px;
+    }
+
+    .about__colums {
+        padding-bottom: 93px;
+    }
+
+    .about__column {
+        gap: 22px;
+    }
+
+    .about__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .about__schedule-startweek {
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 500px) {
+    .about__colums {
+        flex-direction: column;
+    }
+
+    .about__schedule-green {
+        width: 100%;
+    }
+
+    .about__schedule-grey {
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    .about {
+        padding: 70px 0 70px;
+    }
+
+    .about__colums {
+        padding: 60px 0 60px;
+        gap: 56px;
+    }
+
+    .about__column {
+        gap: 16px;
+    }
+
+    .about__subtitle {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .about__text {
+        font-size: 11px;
+        line-height: 16px;
+        max-width: 284px;
+    }
+
+    .about__schedule-startweek {
+        gap: 10px;
+        max-width: 100px;
+        width: 100%;
+    }
+
+    .about__schedule-endweek {
+        gap: 10px;
+        max-width: 184px;
+        width: 100%;
+    }
+
+    .about__schedule-green {
+        font-size: 11px;
+        line-height: 13px;
+        padding: 11 0 11 0px;
+    }
+
+    .about__schedule-grey {
+        font-size: 11px;
+        line-height: 13px;
+        padding: 11px 0 11px 0;
+    }
+
+    .about__schedule-stage {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

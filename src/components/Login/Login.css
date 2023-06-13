@@ -1,0 +1,50 @@
+.login__section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.login__section_password {
+    padding-bottom: 132px;
+}
+
+.login__label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+}
+
+.login__input {
+    padding: 15px;
+    background-color: #F9F9F9;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.login__input:invalid {
+    color: #EE3465;
+}
+
+.login__input:focus {
+    outline-color: #2BE080;
+}
+
+.login__error-message {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}
