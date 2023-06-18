@@ -10,6 +10,27 @@
     position: relative;
 }
 
+.cardlist__btn-more {
+    padding: 11px 60px 9px 60px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 6px;
+    width: 320px;
+    margin: 0 auto;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+    transition: .5s;
+}
+
+.cardlist__btn-more:hover {
+    cursor: pointer;
+    background-color: #a7a4a4;
+}
+
 @media (max-width: 768px) {
     .cardlist {
         padding-bottom: 30px;
@@ -23,5 +44,9 @@
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         row-gap: 16px;
         padding-bottom: 85px;
+    }
+
+    .cardlist__btn-more {
+        width: 240px;
     }
 }

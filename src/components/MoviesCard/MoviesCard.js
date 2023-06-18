@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
-import movieImage from '../../images/movie_img.jpg';
 
-function MoviesCard({ isSavePage }) {
+function MoviesCard({ isSavePage, title, duration, trailerLink, image }) {
     const [isBthActive, setIsBtnActive] = useState(false);
 
     const handleBtnSave = () => {
@@ -12,14 +11,16 @@ function MoviesCard({ isSavePage }) {
     const stateBtnSave = isBthActive ? 'movie__button-save-active' : 'movie__button-save';
     const stateBtnSaveText = isBthActive ? '' : 'Сохранить';
 
+    const urlApi =  'https://api.nomoreparties.co/';
+
     return (
         <li className='movie'>
             <div className='movie__info'>
-                <h3 className='movie__title'>В погоне за Бенкси</h3>
-                <p className='movie__duration'>27 минут</p>
+                <h3 className='movie__title'>{title}</h3>
+                <p className='movie__duration'>{duration}</p>
             </div>
-            <a className='movie__link' target="_blank" rel="noreferrer" href='#'>
-                <img className='movie__img' alt='Картинка из фильма' src={movieImage} />
+            <a className='movie__link' target="_blank" rel="noreferrer" href={trailerLink}>
+                <img className='movie__img' alt='Картинка из фильма' src={urlApi + image} />
             </a>
             {isSavePage
                 ? <button className='movie__button-del' />

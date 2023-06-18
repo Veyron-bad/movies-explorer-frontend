@@ -4,13 +4,12 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import './SavedMovies.css'
 
-function SavedMovies() {
-    const isSavePage = true;
+function SavedMovies({ movies }) {
     return (
         <section className='movies-save'>
-            <div className='movies-save__container content_m'>
+            <div className='movies-save__container'>
                 <SearchForm />
-                <MoviesCardList isSavePage={isSavePage} />
+                <MoviesCardList isSavedPage={true} movies={movies} />
             </div>
         </section>
     )
