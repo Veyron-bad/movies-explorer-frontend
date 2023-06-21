@@ -1,30 +1,60 @@
 import React, { useState } from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext';
+
+import { URL_API } from '../../utils/constants/constants';
 import './MoviesCard.css';
 
-function MoviesCard({ isSavePage, title, duration, trailerLink, image }) {
-    const [isBthActive, setIsBtnActive] = useState(false);
+function MoviesCard({ isSavedPage, movie, isSave, onSaveMovie, onDelSaveMovie }) {
+    const [isBthActive, setIsBtnActive] = useState(isSave);
+    const { setMovies } = React.useContext(CurrentUserContext);
 
-    const handleBtnSave = () => {
-        setIsBtnActive(!isBthActive);
+    console.log(isSave);
+
+    const handelBthSave = (evt) => {
+        if (evt.target.className === 'movie__button-save') {
+            const data = {
+                country: movie.country,
+                director: movie.director,
+                duration: movie.duration,
+                year: movie.year,
+                description: movie.description,
+                image: URL_API + movie.image.url,
+                trailerLink: URL_API + movie.trailerLink,
+                thumbnail: URL_API + movie.image.formats.thumbnail.url,
+                movieId: movie.id,
+                nameRU: movie.nameRU,
+                nameEN: movie.nameEN
+            }
+            onSaveMovie(data);
+            setIsBtnActive(true);
+        } else {
+            onDelSaveMovie(movie.id);
+            setIsBtnActive(false);
+        }
+}
+
+
+
+    const handelBtnDel = (evt) => {
+        onDelSaveMovie(movie._id)
     }
 
     const stateBtnSave = isBthActive ? 'movie__button-save-active' : 'movie__button-save';
     const stateBtnSaveText = isBthActive ? '' : 'Сохранить';
-
-    const urlApi =  'https://api.nomoreparties.co/';
+    const imgUrl = isSavedPage ? movie.image : URL_API + movie.image.url;
 
     return (
         <li className='movie'>
             <div className='movie__info'>
-                <h3 className='movie__title'>{title}</h3>
-                <p className='movie__duration'>{duration}</p>
+                <h3 className='movie__title'>{movie.nameRU}</h3>
+                <p className='movie__duration'>{movie.duration}</p>
             </div>
-            <a className='movie__link' target="_blank" rel="noreferrer" href={trailerLink}>
-                <img className='movie__img' alt='Картинка из фильма' src={urlApi + image} />
+            <a className='movie__link' target="_blank" rel="noreferrer" href={movie.trailerLink}>
+                <img className='movie__img' alt={movie.nameRU} src={imgUrl} />
             </a>
-            {isSavePage
-                ? <button className='movie__button-del' />
-                : <button onClick={handleBtnSave} className={stateBtnSave}>{stateBtnSaveText}</button>}
+            {isSavedPage
+                ? <button onClick={handelBtnDel} className='movie__button-del' />
+                : <button onClick={handelBthSave} className={stateBtnSave}>{stateBtnSaveText}</button>}
         </li>
     )
 }

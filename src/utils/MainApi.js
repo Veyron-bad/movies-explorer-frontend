@@ -5,7 +5,7 @@ class MainApi {
     }
 
     _isOk(res) {
-        if(res.ok) {
+        if (res) {
             return res.json();
         }
 
@@ -19,9 +19,9 @@ class MainApi {
             body: JSON.stringify(data),
         })
 
-        .then((res) => {
-            return this._isOk(res);
-        })
+            .then((res) => {
+                return this._isOk(res);
+            })
     }
 
     login(data) {
@@ -32,9 +32,20 @@ class MainApi {
             credentials: 'include'
         })
 
-        .then((res) => {
-            return this._isOk(res);
+            .then((res) => {
+                return this._isOk(res);
+            })
+    }
+
+    checkToken() {
+        return fetch(this._baseUrl + '/users/me', {
+            headers: this._headers,
+            credentials: 'include'
         })
+
+            .then((res) => {
+                return this._isOk(res)
+            })
     }
 
     signOut() {
@@ -63,9 +74,9 @@ class MainApi {
             credentials: 'include'
         })
 
-        .then((res) => {
-            return this._isOk(res);
-        })
+            .then((res) => {
+                return this._isOk(res);
+            })
     }
 
     getMovies() {
@@ -74,9 +85,9 @@ class MainApi {
             credentials: 'include'
         })
 
-        .then((res) => {
-            return this._isOk(res);
-        })
+            .then((res) => {
+                return this._isOk(res);
+            })
     }
 
     saveMovie(data) {
@@ -87,9 +98,9 @@ class MainApi {
             credentials: 'include'
         })
 
-        .then((res) => {
-            return this._isOk(res);
-        })
+            .then((res) => {
+                return this._isOk(res);
+            })
     }
 
     deleteMovie(movieId) {
@@ -99,13 +110,13 @@ class MainApi {
             credentials: 'include'
         })
 
-        .then((res) => {
-            return this._isOk(res);
-        })
+            .then((res) => {
+                return this._isOk(res);
+            })
     }
 }
 
 export const mainApi = new MainApi({
-    baseUrl: 'https://api.veyronbad.nomoredomains.rocks',
-    headers: {'Content-Type': 'application/json'}
+    baseUrl: 'http://localhost:3001',
+    headers: { 'Content-Type': 'application/json' }
 })

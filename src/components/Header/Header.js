@@ -6,7 +6,7 @@ import NavigationLandin from '../NavigationLandin/NavigationLandin';
 import ButtonBurger from '../ButtonBurger/ButtonBurger';
 import MobileMenu from '../MobileMenu/MobileMenu';
 
-function Header({ location }) {
+function Header({ location, isLoggedIn }) {
     const [ isActiveBth, setIsBtnBurger ] = useState(false);
 
     const clickBthBurger = () => {
@@ -19,13 +19,13 @@ function Header({ location }) {
     return (
         <>
         <MobileMenu isActiveBth={isActiveBth} />
-            <header className={isLocation ? 'header' : 'header header__main'}>
+            <header className={isLoggedIn ? 'header' : 'header header__main'}>
                 <div className='header__container'>
                     <Link to='/' className='header__logo-link'>
                         <div className='header__logo'></div>
                     </Link>
                     <nav className='header__navigation'>
-                        {isLocation ? <NavigationMain /> : <NavigationLandin />}
+                        {isLoggedIn ? <NavigationMain /> : <NavigationLandin />}
                     </nav>
                 </div>
                 {isLocation && <ButtonBurger onClickBtn={clickBthBurger} isActiveBth={isActiveBth} />}
