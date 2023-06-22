@@ -16,3 +16,6 @@ export const CARD_FOR_MORE_480 = 2;
 
 // URL API
 export const URL_API = 'https://api.nomoreparties.co/'
+
+// Фильм duration
+export const DURATION_FILM = 40;

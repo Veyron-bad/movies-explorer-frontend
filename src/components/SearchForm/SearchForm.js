@@ -2,16 +2,19 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchForm.css';
 
-function SearchForm({ searchMovie, path, searchSaveMovies }) {
+function SearchForm({ searchMovie, path, onSearchSaveMovie }) {
     useEffect(() => {
         if ((JSON.parse(localStorage.getItem('stateSearch')) !== null) && (path === '/movies')) {
             const searchStateLocal = JSON.parse(localStorage.getItem('stateSearch'));
             setValue('searchText', searchStateLocal.searchText);
             setValue('shortMovie', searchStateLocal.shortMovie);
-        } else {
+        } else if((JSON.parse(localStorage.getItem('stateSearchForSaveMovie')) !== null) && (path === '/saved-movies'))  {
             const searchStateLocal = JSON.parse(localStorage.getItem('stateSearchForSaveMovie'));
             setValue('searchText', searchStateLocal.searchText);
             setValue('shortMovie', searchStateLocal.shortMovie);
+        } else {
+            setValue('searchText', '');
+            setValue('shortMovie', '');
         }
     }, [])
 
@@ -27,7 +30,7 @@ function SearchForm({ searchMovie, path, searchSaveMovies }) {
         if (path === '/movies') {
             searchMovie(data);
         } else if (path === '/saved-movies') {
-            searchSaveMovies(data);
+            onSearchSaveMovie(data);
         }
     }
 

@@ -20,7 +20,7 @@ function Register({ registration, errMessage, isLoggedIn }) {
             registration={registration}
             isValid={isValid}
             errMessage={errMessage} >
-            <div className='register__section register__section_name'>
+            <div className='register__section register__section-name'>
                 <label className='register__label'>Имя</label>
                 <input
                     className='register__input'
@@ -34,7 +34,7 @@ function Register({ registration, errMessage, isLoggedIn }) {
                     })} />
                 {errors?.name && <div className='register__error-message'>{errors.name.message}</div>}
             </div>
-            <div className='register__section register__section_email'>
+            <div className='register__section register__section-email'>
                 <label className='register__label'>E-mail</label>
                 <input
                     className='register__input'
@@ -49,7 +49,7 @@ function Register({ registration, errMessage, isLoggedIn }) {
                     })} />
                 {errors?.email && <div className='register__error-message'>{errors.email.message}</div>}
             </div>
-            <div className='register__section register__section_password'>
+            <div className='register__section register__section-password'>
                 <label className='register__label'>Пароль</label>
                 <input
                     className='register__input'

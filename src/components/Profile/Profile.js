@@ -40,7 +40,7 @@ function Profile({ signOut, editUserProfile, infoMessage, errMessage }) {
         <div className='profile'>
             <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
             <form onSubmit={handleSubmit(onSubmit)} className='profile__form'>
-                <div className='profile__section profile__section_name'>
+                <div className='profile__section profile__section-name'>
                     <label>Имя</label>
                     <input
                         className='profile__input-name'
@@ -55,7 +55,7 @@ function Profile({ signOut, editUserProfile, infoMessage, errMessage }) {
                         })} />
                     {errors?.name && <div className='profile__error-message'>{errors.name.message}</div>}
                 </div>
-                <div className='profile__section profile__section_email'>
+                <div className='profile__section profile__section-email'>
                     <label>Email</label>
                     <input
                         className='profile__input-email'

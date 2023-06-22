@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { CurrentUserContext } from '../context/CurrentUserContext';
 
 import { URL_API } from '../../utils/constants/constants';
 import './MoviesCard.css';
 
 function MoviesCard({ isSavedPage, movie, isSave, onSaveMovie, onDelSaveMovie }) {
     const [isBthActive, setIsBtnActive] = useState(isSave);
-    const { setMovies } = React.useContext(CurrentUserContext);
-
-    console.log(isSave);
 
     const handelBthSave = (evt) => {
         if (evt.target.className === 'movie__button-save') {

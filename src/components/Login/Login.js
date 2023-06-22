@@ -21,7 +21,7 @@ function Login({ isLoggedIn, authorization, errMessage }) {
             authorization={authorization}
             errMessage={errMessage} >
 
-            <div className='login__section login__section_email'>
+            <div className='login__section login__section-email'>
                 <label className='login__label'>E-mail</label>
                 <input
                     className='login__input'
@@ -36,7 +36,7 @@ function Login({ isLoggedIn, authorization, errMessage }) {
                     })} />
                 {errors?.email && <div className='login__error-message'>{errors.email.message}</div>}
             </div>
-            <div className='login__section login__section_password'>
+            <div className='login__section login__section-password'>
                 <label className='login__label'>Пароль</label>
                 <input
                     className='login__input'

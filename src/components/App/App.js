@@ -14,6 +14,9 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../context/CurrentUserContext';
+import { DURATION_FILM } from '../../utils/constants/constants';
+import Preloader  from '../Preloader/Preloader';
+import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const location = useLocation();
@@ -46,32 +49,29 @@ function App() {
 
   // Получение с mainApi сохраненныe фильмы
   useEffect(() => {
-    getSaveMovies();
-  }, [])
-
-  const getSaveMovies = () => {
     mainApi.getMovies()
       .then((res) => {
-        localStorage.setItem('saveMovie', JSON.stringify(res));
-        setMyMovies(res);
+        if (!res.message) {
+          setMyMovies(res)
+        }
       })
 
       .catch((err) => {
-        console.log(`Ошибка получения фильмов: ${err}`)
+        console.log(`Ошибка получения данных ${err}`)
       })
-  }
 
-// Проверка авторизации пользователя
+  }, [])
+
+  // Проверка авторизации пользователя
   const checkLoggedIn = () => {
     mainApi.checkToken()
       .then((res) => {
-        if(res.message) {
+        if (res.message) {
           setIsLoggedIn(false);
-          navigate('/', { replace: true })
         } else {
           setIsLoggedIn(true);
           setCurrentUser(res);
-          navigate(path, { replace: true })
+          navigate(path, {replace: true });
         }
       })
 
@@ -84,7 +84,7 @@ function App() {
   const authorization = (data) => {
     mainApi.login(data)
       .then((res) => {
-        if(res.message) {
+        if (res.message) {
           setErrMessage(res.message);
         } else {
           setErrMessage('');
@@ -106,11 +106,11 @@ function App() {
           const { email } = res;
           mainApi.login({ email, password: data.password })
             .then((res) => {
-              if(res.message) {
+              if (res.message) {
                 setErrMessage(res.message);
               } else {
                 setErrMessage('');
-                checkLoggedIn()
+                checkLoggedIn();
                 setIsLoggedIn(true);
                 navigate('/movies', { replace: true })
               }
@@ -135,7 +135,7 @@ function App() {
   const editUserProfile = (data) => {
     mainApi.editUserInfo(data)
       .then((res) => {
-        if(res.message) {
+        if (res.message) {
           setErrMessage(res.message)
         } else {
           setCurrentUser(res)
@@ -159,8 +159,9 @@ function App() {
     mainApi.saveMovie(data)
       .then((res) => {
         setMyMovies([res, ...myMovies]);
+        localStorage.setItem('saveMovie', JSON.stringify([res, ...myMovies]))
       })
-      .catch((err) =>{
+      .catch((err) => {
         console.log(`Ошибка сохранения фильма ${err}`)
       })
   }
@@ -170,9 +171,9 @@ function App() {
     if (typeof id !== 'number') {
       mainApi.deleteMovie(id)
         .then((res) => {
-          console.log(res)
           const movies = myMovies.filter(movie => movie._id !== id)
           setMyMovies(movies)
+          localStorage.setItem('saveMovie', JSON.stringify(movies))
         })
         .catch((err) => {
           console.log(`Ошибка удаления карточки ${err}`)
@@ -181,27 +182,15 @@ function App() {
       const movie = myMovies.find(movie => movie.movieId === id)
       mainApi.deleteMovie(movie._id)
         .then((res) => {
-          console.log(res)
-          const movies = myMovies.filter(item => item._id !== movie._id)
-          setMyMovies(movies)
+          const result = myMovies.filter(item => item._id !== movie._id)
+          setMyMovies(result)
+          localStorage.setItem('saveMovie', JSON.stringify(result))
         })
         .catch((err) => {
           console.log(`Ошибка удаления карточки ${err}`)
         })
     }
   }
-
-  console.log(movies)
-
-  // const newMovies = movies.map((movie) => {
-  //   const result = myMovies.find(myMovie=> myMovie.movieId === movie.id);
-  //   if(result === undefined) {
-  //     return {...movie, isLike: false}
-  //   } else {
-  //     return {...movie, isLike: true}
-  //   }
-  // })
-  // console.log(newMovies);
 
   //Обработчик формы поиска на странице всех фильмов
   const handelSearchMovies = (data) => {
@@ -216,7 +205,7 @@ function App() {
 
           const filterMovie = res.filter(movie => {
             if (data.shortMovie) {
-              return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < 40
+              return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
             } else {
               return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
             }
@@ -244,7 +233,7 @@ function App() {
     } else {
       const filterMovie = allMovies.filter(movie => {
         if (data.shortMovie) {
-          return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < 40
+          return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
         } else {
           return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
         }
@@ -261,36 +250,71 @@ function App() {
     }
   }
 
+  const handelSearchSaveMovie = (data) => {
+    localStorage.setItem('stateSearchForSaveMovie', JSON.stringify(data))
+    const saveMovies = JSON.parse(localStorage.getItem('saveMovie'));
+
+    const filterMovie = saveMovies.filter(movie => {
+      if (data.shortMovie) {
+        return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
+      } else {
+        return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
+      }
+    })
+
+    if (filterMovie.length === 0) {
+      setSearchSuccess(true);
+    } else {
+      setSearchSuccess(false);
+    }
+
+    setMyMovies(filterMovie);
+  }
+
   return (
-    <CurrentUserContext.Provider value={{currentUser, myMovies, setMovies}}>
-    <div className="App">
-      {setHeader && <Header location={location} isLoggedIn={isLoggedIn} />}
-      <main>
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies
-            movies={movies}
-            searchMovie={handelSearchMovies}
-            path={path}
-            isLoading={isLoading}
-            searchSuccess={searchSuccess}
-            isProplem={isProplem}
-            onSaveMovie={handelSaveMovie}
-            onDelSaveMovie={handelDeleteMovie}
-            // upgradeMovie={upgradeMovie}
-          />} />
-          <Route path='/saved-movies' element={<SavedMovies movies={myMovies} path={path} onDelSaveMovie={handelDeleteMovie} />} />
+    <CurrentUserContext.Provider value={{ currentUser, myMovies, setMovies }}>
+      <div className="App">
+        {setHeader && <Header location={location} isLoggedIn={isLoggedIn} />}
+        <main>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/movies' element={<ProtectedRouteElement
+              isLoggedIn={isLoggedIn}
+              element={Movies}
+              movies={movies}
+              searchMovie={handelSearchMovies}
+              path={path}
+              isLoading={isLoading}
+              searchSuccess={searchSuccess}
+              isProplem={isProplem}
+              onSaveMovie={handelSaveMovie}
+              onDelSaveMovie={handelDeleteMovie}
+            />} />
+            <Route path='/saved-movies' element={<ProtectedRouteElement
+              isLoggedIn={isLoggedIn}
+              element={SavedMovies}
+              movies={myMovies}
+              path={path}
+              onDelSaveMovie={handelDeleteMovie}
+              onSearchSaveMovie={handelSearchSaveMovie}
+              searchSuccess={searchSuccess} />} />
 
+            <Route path='/profile' element={<ProtectedRouteElement
+              element={Profile}
+              isLoggedIn={isLoggedIn}
+              signOut={signOut}
+              editUserProfile={editUserProfile}
+              infoMessage={infoMessage}
+              errMessage={errMessage} />} />
 
-
-          <Route path='/profile' element={<Profile signOut={signOut} editUserProfile={editUserProfile} infoMessage={infoMessage} errMessage={errMessage} />} />
-          <Route path='/signup' element={<Register registration={registration} errMessage={errMessage} isLoggedIn={isLoggedIn} />} />
-          <Route path='/signin' element={<Login isLoggedIn={isLoggedIn} authorization={authorization} errMessage={errMessage} />} />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </main>
-      {setFooter && <Footer />}
-    </div>
+            <Route path='/signup' element={<Register registration={registration} errMessage={errMessage} isLoggedIn={isLoggedIn} />} />
+            <Route path='/signin' element={<Login isLoggedIn={isLoggedIn} authorization={authorization} errMessage={errMessage} />} />
+            <Route path='*' element={<PageNotFound />} />
+          </Routes>
+        </main>
+        {setFooter && <Footer />}
+      </div>
+      }
     </CurrentUserContext.Provider>
   );
 }

@@ -15,12 +15,12 @@ import {
     CARD_FOR_MORE_768,
     CARD_FOR_MORE_480
 } from '../../utils/constants/constants.js';
+import { checkLike } from '../../utils/checkLike';
 
 function MoviesCardList({ movies, searchSuccess, isProplem, isSavedPage, onSaveMovie, onDelSaveMovie }) {
     const [width, setWidth] = useState(window.innerWidth);
     const [currentCard, setCurrentCard] = useState(3);
-    const {currentUser, myMovies, setMovies} = React.useContext(CurrentUserContext);
-    const [like, setLike] = useState(false);
+    const {currentUser} = React.useContext(CurrentUserContext);
 
     const handelResize = (evt) => {
         setTimeout(() => {
@@ -58,14 +58,15 @@ function MoviesCardList({ movies, searchSuccess, isProplem, isSavedPage, onSaveM
                 {searchSuccess ? <SeachNotFound /> : null}
                 {isProplem ? <div style={{ color: '#2BE080' }}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</div> : null}
                 {movies.slice(0, currentCard).map((movie) => {
-                    const isLike = (movie.isLike === true) ? true : false
+                    const isLikeCard = checkLike(movie);
+                    const like = (isLikeCard.length > 0) ? true : false
                         return  (
                     <MoviesCard
                         key={movie.id || movie._id}
                         movie={movie}
                         userId={currentUser._id}
                         isSavedPage={isSavedPage}
-                        isSave={isLike}
+                        isSave={like}
                         onSaveMovie={onSaveMovie}
                         onDelSaveMovie={onDelSaveMovie}
                     />
