@@ -2,6 +2,14 @@
 
 Ссылка: https://disk.yandex.ru/d/ArsBvuEXsDuqDA
 
+# Ссылка на frontend
+
+Ссылка: https://veyronbad.nomoredomains.rocks
+
+# Ссылка на Pull request
+
+Ссылка: https://github.com/Veyron-bad/movies-explorer-frontend/pull/2
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

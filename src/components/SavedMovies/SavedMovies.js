@@ -4,13 +4,12 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import './SavedMovies.css'
 
-function SavedMovies() {
-    const isSavePage = true;
+function SavedMovies({ movies, onDelSaveMovie, path, onSearchSaveMovie, saveSearchSuccess, switchShorSavetMovies }) {
     return (
         <section className='movies-save'>
-            <div className='movies-save__container content_m'>
-                <SearchForm />
-                <MoviesCardList isSavePage={isSavePage} />
+            <div className='movies-save__container'>
+                <SearchForm path={path} onSearchSaveMovie={onSearchSaveMovie} switchShorSavetMovies={switchShorSavetMovies} />
+                <MoviesCardList isSavedPage={true} movies={movies} onDelSaveMovie={onDelSaveMovie} saveSearchSuccess={saveSearchSuccess} />
             </div>
         </section>
     )

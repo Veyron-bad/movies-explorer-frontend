@@ -63,9 +63,8 @@
     line-height: 12px;
     color: #EE3465;
     position: absolute;
-    top: 50px;
-    left: 325px;
-    display: none;
+    top: 70%;
+    left: 7%;
 }
 
 .search-form__button {

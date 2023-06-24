@@ -12,27 +12,6 @@
     margin: 0 auto;
 }
 
-.movies__more {
-    padding: 11px 60px 9px 60px;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 6px;
-    width: 320px;
-    margin: 0 auto;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    transition: .5s;
-}
-
-.movies__more:hover {
-    cursor: pointer;
-    background-color: #a7a4a4;
-}
-
 @media (max-width: 768px) {
     .movies__container {
         max-width: 1140px;
