@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchForm.css';
 
-function SearchForm({ searchMovie, path, onSearchSaveMovie }) {
+function SearchForm({ searchMovie, path, onSearchSaveMovie, switchShortMovies, switchShorSavetMovies }) {
     useEffect(() => {
         if ((JSON.parse(localStorage.getItem('stateSearch')) !== null) && (path === '/movies')) {
             const searchStateLocal = JSON.parse(localStorage.getItem('stateSearch'));
@@ -22,9 +22,22 @@ function SearchForm({ searchMovie, path, onSearchSaveMovie }) {
         handleSubmit,
         formState: { errors },
         setValue,
+        getValues,
     } = useForm({
         mode: 'onChange'
     });
+
+    const switchShort = (evt) => {
+        const data = {
+            searchText: getValues('searchText'),
+            shortMovie: evt.target.checked,
+        }
+        if(path === '/movies') {
+            switchShortMovies(data);
+        } else if (path === '/saved-movies') {
+            switchShorSavetMovies(data)
+        }
+    }
 
     const onSubmit = (data) => {
         if (path === '/movies') {
@@ -50,7 +63,7 @@ function SearchForm({ searchMovie, path, onSearchSaveMovie }) {
             </div>
             <div className='search-form__filter'>
                 <div className='search-form__filter-container'>
-                    <input className='search-form__filter-switch'
+                    <input onClick={switchShort} className='search-form__filter-switch'
                         type='checkbox'
                         {...register('shortMovie')}
                     />

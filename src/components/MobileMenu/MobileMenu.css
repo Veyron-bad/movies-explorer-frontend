@@ -1,6 +1,7 @@
 .mobile-menu {
     transform: translateY(-1290px);
     transition: .5s;
+    display: none;
 }
 
 .mobile-menu-active {
@@ -10,6 +11,7 @@
     z-index: 1;
     transform: translate(0);
     transition: .5s;
+    display: block;
 }
 
 .blackout {

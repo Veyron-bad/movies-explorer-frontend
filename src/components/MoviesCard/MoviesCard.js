@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
 import { URL_API } from '../../utils/constants/constants';
+import { changeTheTime } from '../../utils/changeTheTime';
 import './MoviesCard.css';
 
 function MoviesCard({ isSavedPage, movie, isSave, onSaveMovie, onDelSaveMovie }) {
     const [isBthActive, setIsBtnActive] = useState(isSave);
+    const movieDuration = changeTheTime(movie.duration);
 
     const handelBthSave = (evt) => {
         if (evt.target.className === 'movie__button-save') {
@@ -43,7 +45,7 @@ function MoviesCard({ isSavedPage, movie, isSave, onSaveMovie, onDelSaveMovie })
         <li className='movie'>
             <div className='movie__info'>
                 <h3 className='movie__title'>{movie.nameRU}</h3>
-                <p className='movie__duration'>{movie.duration}</p>
+                <p className='movie__duration'>{movieDuration}</p>
             </div>
             <a className='movie__link' target="_blank" rel="noreferrer" href={movie.trailerLink}>
                 <img className='movie__img' alt={movie.nameRU} src={imgUrl} />

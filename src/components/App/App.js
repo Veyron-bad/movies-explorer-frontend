@@ -30,11 +30,13 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [searchSuccess, setSearchSuccess] = useState(false);
+  const [saveSearchSuccess, setSaveSearchSuccess] = useState(false);
   const [isProplem, setIsProblem] = useState(false);
   const [errMessage, setErrMessage] = useState('')
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [infoMessage, setInfoMessage] = useState('');
+  const [isSwitchActive, setIsSwitchActive] = useState(false);
 
   // Получаем данные о фильмах из localSorage
   useEffect(() => {
@@ -49,18 +51,19 @@ function App() {
 
   // Получение с mainApi сохраненныe фильмы
   useEffect(() => {
-    mainApi.getMovies()
+    if(isLoggedIn) {
+      mainApi.getMovies()
       .then((res) => {
-        if (!res.message) {
-          setMyMovies(res)
-        }
+        console.log(res)
+        setMyMovies(res);
+        localStorage.setItem('saveMovie', JSON.stringify(res));
       })
 
       .catch((err) => {
-        console.log(`Ошибка получения данных ${err}`)
+        console.log(`Ошибка получения данных ${err}`);
       })
-
-  }, [])
+    }
+  }, [isLoggedIn])
 
   // Проверка авторизации пользователя
   const checkLoggedIn = () => {
@@ -71,7 +74,7 @@ function App() {
         } else {
           setIsLoggedIn(true);
           setCurrentUser(res);
-          navigate(path, {replace: true });
+          // navigate(path, {replace: true });
         }
       })
 
@@ -205,9 +208,9 @@ function App() {
 
           const filterMovie = res.filter(movie => {
             if (data.shortMovie) {
-              return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
+              return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase()) && movie.duration < DURATION_FILM
             } else {
-              return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
+              return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase())
             }
           })
 
@@ -233,9 +236,9 @@ function App() {
     } else {
       const filterMovie = allMovies.filter(movie => {
         if (data.shortMovie) {
-          return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
+          return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase()) && movie.duration < DURATION_FILM
         } else {
-          return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
+          return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase())
         }
       })
 
@@ -256,20 +259,58 @@ function App() {
 
     const filterMovie = saveMovies.filter(movie => {
       if (data.shortMovie) {
-        return ((movie.nameRU.toLowerCase().includes(data.searchText)) || (movie.nameEN.toLowerCase().includes(data.searchText))) && movie.duration < DURATION_FILM
+        return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase()) && movie.duration < DURATION_FILM
       } else {
-        return movie.nameRU.toLowerCase().includes(data.searchText) || movie.nameEN.toLowerCase().includes(data.searchText)
+        return movie.nameRU.toLowerCase().includes(data.searchText.toLowerCase())
       }
     })
 
     if (filterMovie.length === 0) {
-      setSearchSuccess(true);
+      setSaveSearchSuccess(true);
     } else {
-      setSearchSuccess(false);
+      setSaveSearchSuccess(false);
     }
 
     setMyMovies(filterMovie);
   }
+
+ const switchShortMovies = (data) => {
+  localStorage.setItem('stateSearch', JSON.stringify(data))
+  if(data.shortMovie) {
+    const filterShortMovie = movies.filter(movie => {
+      return movie.duration <= DURATION_FILM;
+    })
+
+    if(filterShortMovie.length === 0) {
+      setSearchSuccess(true);
+    } else {
+      setSearchSuccess(false)
+    }
+    setMovies(filterShortMovie);
+  } else {
+    setMovies(JSON.parse(localStorage.getItem('filterMovie')))
+    setSearchSuccess(false)
+  }
+ }
+
+ const switchShortSaveMovies = (data) => {
+  localStorage.setItem('stateSearchForSaveMovie', JSON.stringify(data))
+  if(data.shortMovie) {
+    const filterShortMovie = myMovies.filter(movie => {
+      return movie.duration < DURATION_FILM;
+    })
+
+    if(filterShortMovie.length === 0) {
+      setSaveSearchSuccess(true);
+    } else {
+      setSaveSearchSuccess(false)
+    }
+    setMyMovies(filterShortMovie);
+  } else {
+    setMyMovies(JSON.parse(localStorage.getItem('saveMovie')))
+    setSaveSearchSuccess(false)
+  }
+ }
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, myMovies, setMovies }}>
@@ -289,6 +330,7 @@ function App() {
               isProplem={isProplem}
               onSaveMovie={handelSaveMovie}
               onDelSaveMovie={handelDeleteMovie}
+              switchShortMovies={switchShortMovies}
             />} />
             <Route path='/saved-movies' element={<ProtectedRouteElement
               isLoggedIn={isLoggedIn}
@@ -297,7 +339,8 @@ function App() {
               path={path}
               onDelSaveMovie={handelDeleteMovie}
               onSearchSaveMovie={handelSearchSaveMovie}
-              searchSuccess={searchSuccess} />} />
+              saveSearchSuccess={saveSearchSuccess}
+              switchShorSavetMovies={switchShortSaveMovies} />} />
 
             <Route path='/profile' element={<ProtectedRouteElement
               element={Profile}
@@ -314,7 +357,6 @@ function App() {
         </main>
         {setFooter && <Footer />}
       </div>
-      }
     </CurrentUserContext.Provider>
   );
 }

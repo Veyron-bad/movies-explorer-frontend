@@ -17,7 +17,7 @@ import {
 } from '../../utils/constants/constants.js';
 import { checkLike } from '../../utils/checkLike';
 
-function MoviesCardList({ movies, searchSuccess, isProplem, isSavedPage, onSaveMovie, onDelSaveMovie }) {
+function MoviesCardList({ movies, searchSuccess, isProplem, isSavedPage, onSaveMovie, onDelSaveMovie, saveSearchSuccess }) {
     const [width, setWidth] = useState(window.innerWidth);
     const [currentCard, setCurrentCard] = useState(3);
     const {currentUser} = React.useContext(CurrentUserContext);
@@ -55,7 +55,7 @@ function MoviesCardList({ movies, searchSuccess, isProplem, isSavedPage, onSaveM
     return (
         <>
             <ul className='cardlist'>
-                {searchSuccess ? <SeachNotFound /> : null}
+                {(searchSuccess || saveSearchSuccess) ? <SeachNotFound /> : null}
                 {isProplem ? <div style={{ color: '#2BE080' }}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</div> : null}
                 {movies.slice(0, currentCard).map((movie) => {
                     const isLikeCard = checkLike(movie);

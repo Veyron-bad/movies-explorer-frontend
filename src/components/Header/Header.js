@@ -11,10 +11,9 @@ function Header({ location, isLoggedIn }) {
 
     const clickBthBurger = () => {
         setIsBtnBurger(!isActiveBth);
-        console.log('pres')
     }
 
-    const isLocation = location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile';
+    const isLocation = location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' || location.pathname === '/';
 
     return (
         <>
